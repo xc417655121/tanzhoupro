@@ -98,7 +98,7 @@ var live_url="//www.shiguangkey.com/live/";
    <!--header 开始-->
 <!--   <div class="hbg">-->
 	<div class="w1195 header">
-    	<h1 class="logo fl"><a  href="index.htm"    target="_blank">
+    	<h1 class="logo fl"><a  href="{% url 'user:index' %}"    target="_blank">
     		<img src="{% static 'images/logo.png' %}" alt="潭州课堂电商logo" /></a>
    		</h1>
 		<!-- 搜索关键字 -->
@@ -119,12 +119,12 @@ var live_url="//www.shiguangkey.com/live/";
             <!--已登录展示效果 - 开始-->
             <div class="thelogin " id="">
                 <div class="personal fr">
-                	<a href="../i/index.htm" target="_blank" class="perimg" ><img src="{% static 'images/default.png' %}" id="imgId1"></a>
+                	<a href="" target="_blank" class="perimg" ><img src="{% static 'images/default.png' %}" id="imgId1"></a>
                 	<div class="peohover">
                     	<i class="icon pericon"></i>
                 		 <ul class="perul">
-                             <li><a href="../i/course.htm" target="_blank">课表</a></li>
-                             <li><a href="../i/order.htm" target="_blank">我的订单</a></li>
+                             <li><a href="" target="_blank">课表</a></li>
+                             <li><a href="" target="_blank">我的订单</a></li>
                              <li><a href="{% url 'user:info' %}" target="_blank">个人信息</a></li>
                              <li><a href="/users/logout/" class="pertopbor" id="logout">退出</a></li>
                        </ul>
@@ -167,8 +167,8 @@ var live_url="//www.shiguangkey.com/live/";
       	      	<!--主导航 - 开始-->
         		<div class="navigation">
             		<ul>
-            		<li><a href="index.htm"    target="_blank">首页</a></li>
-                    <li><a href="list.htm" target="_blank">全部课程</a></li>
+            		<li><a href="{% url 'user:index' %}" target="_blank">首页</a></li>
+                    <li><a href="{% url 'course:list' %}" target="_blank">全部课程</a></li>
                     <!-- <li><a href="http://bbs.tanzhouedu.com/" target="_blank">社区</a></li> -->
                     <li>
                     	<a href="../help/downloadApp" target="_blank">客户端</a>

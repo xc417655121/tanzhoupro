@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url,include
 from django.contrib import admin
-from user.views import IndexView, LoginView, LogoutView,RegisterView,ActiveUserView,ForgetPwdView,ResetView,ModifyPwdView,UserInfoView,ChangePwdView
+from user.views import IndexView, LoginView, LogoutView,RegisterView,ActiveUserView,ForgetPwdView,\
+    ResetView,ModifyPwdView,UserInfoView,ChangePwdView,UserCourseView,UserOrderView,UserWorkView,\
+    UploadImageView
 
 urlpatterns = [
     # 主页
@@ -47,6 +49,22 @@ urlpatterns = [
 
     # 修改密码
     url(r'change_pwd/$', ChangePwdView.as_view(), name='change_pwd'),
+
+    # 用户课程表
+    url(r'course/$', UserCourseView.as_view(), name='course'),
+
+    # 用户订单
+    url(r'order/$', UserOrderView.as_view(), name='order'),
+
+    # 用户作业
+    url(r'homework/$', UserWorkView.as_view(), name="homework"),
+
+    # 用户头像上传
+    url(r'^image/upload/$', UploadImageView.as_view(), name="image_upload"),
+
+
+
+
 
 
 ]

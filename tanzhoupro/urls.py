@@ -17,13 +17,22 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from user.views import IndexView
 
+from tanzhoupro.settings import MEDIA_ROOT
+from django.views.static import serve
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
-    # user
+    # 关于用户user
     url(r'^users/', include('user.urls',namespace='user')),
+
+    # 关于课程course
+    url(r'^courses/', include('course.urls',namespace='course')),
 
     # 获取验证码
     url(r'^captcha/', include('captcha.urls')),
 
+    #配置上传文件的访问处理函数
+    url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
 ]
+

@@ -30,7 +30,7 @@ class CourseSort(models.Model):
 class Course(models.Model):
     sort = models.ForeignKey(CourseSort,verbose_name=u'分类')
     name = models.CharField(max_length=30, verbose_name=u"课程名称")
-    price = models.CharField(max_length=10, verbose_name=u"价格")
+    price = models.IntegerField(default=0, verbose_name=u"价格")
     learn_time = models.CharField(max_length=6, verbose_name=u"学习时长")
     nums = models.IntegerField(default=0, verbose_name=u"购买人数")
     image = models.ImageField(upload_to="img/&Y/%m", verbose_name=u"封面图")

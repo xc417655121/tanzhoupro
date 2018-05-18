@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.views import View
 # Create your views here.
-from user.forms import LoginForm,RegisterForm,ForgetPwdForm,ModifyPwdForm,ChangePwdForm
+from user.forms import LoginForm,RegisterForm,ForgetPwdForm,ModifyPwdForm,ChangePwdForm,\
+    UploadImageForm,UploadInfoForm
 from django.contrib.auth import authenticate,login,logout
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
@@ -48,7 +49,7 @@ class LoginView(View):
                 else:
                     return render(request,'login.html',{'mess':'用户未激活!'})
             else:
-                return render(request,'login.html',{'mess':'用户名或密码有误!'})
+                return render(request,'login.html',{'mess':'用户名或密码有误!','login_form':login_form})
         else:
             return render(request,'login.html',{'login_form':login_form})
 
@@ -153,6 +154,14 @@ class UserInfoView(LoginRequiredMixin,View):
     def get(self,request):
         return render(request,'my_info.html',{})
 
+    def post(self,request):
+        info_form = UploadInfoForm(request.POST,instance=request.user)
+        if info_form.is_valid():
+            info_form.save()
+            return HttpResponseRedirect(reverse('user:info'))
+        else:
+            return render(request,'my_info.html',{'info_form':info_form})
+
 
 # 关于用户密码修改
 class ChangePwdView(LoginRequiredMixin, View):
@@ -180,3 +189,41 @@ class ChangePwdView(LoginRequiredMixin, View):
             else:
                 return render(request,'my_paasword.html',{'email':email,'msg':'旧密码有误!'})
         return render(request,'my_paasword.html',{'email':email,'change_form':change_form})
+
+
+# 用户课程
+class UserCourseView(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'my_course.html', {})
+
+    def post(self, request):
+        pass
+
+
+# 用户订单
+class UserOrderView(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'my_order.html', {})
+
+    def post(self, request):
+        pass
+
+
+# 用户作业
+class UserWorkView(LoginRequiredMixin, View):
+    def get(self, request):
+        return render(request, 'my_homework.html', {})
+
+    def post(self, request):
+        pass
+
+
+# 用户修改头像
+class UploadImageView(LoginRequiredMixin,View):
+    def post(self,request):
+        image_form = UploadImageForm(request.POST, request.FILES, instance=request.user)
+        if image_form.is_valid():
+            image_form.save()
+            return HttpResponseRedirect(reverse('user:info'))
+        else:
+            return render(request,'my_info.html')
